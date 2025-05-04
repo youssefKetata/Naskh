@@ -3,6 +3,8 @@ import "@/app/globals.css"
 import { Scheherazade_New } from "next/font/google"
 import { ThemeProvider } from "@/components/theme-provider"
 import { Toaster } from "@/components/toaster"
+import { Analytics } from "@vercel/analytics/react"
+import { Suspense } from "react"
 
 const scheherazade = Scheherazade_New({
   subsets: ["arabic"],
@@ -84,8 +86,9 @@ export default function RootLayout({
       </head>
       <body className={scheherazade.className}>
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
-          {children}
+          <Suspense>{children}</Suspense>
           <Toaster />
+          <Analytics />
         </ThemeProvider>
 
         {/* Schema.org JSON-LD structured data */}
